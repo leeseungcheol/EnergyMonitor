@@ -4,7 +4,7 @@
 #### Install packages and clone the source code.
 
 ```
-# sudo apt-get install qt4-default qt4-designer libqwt-dev
+# sudo apt-get install qt4-default libqwt-dev
 # git clone https://github.com/john1117/xu_sysInfo.git
 ```
 
