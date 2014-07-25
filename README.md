@@ -2,9 +2,10 @@
 how to build the sysInfo Qt application.
 
 Install packages and clone the source code.
-# sudo apt-get install qt4-default qt4-designer libqwt-dev
-# git clone https://github.com/john1117/xu_sysInfo.git
-
+<code>
+sudo apt-get install qt4-default qt4-designer libqwt-dev
+git clone https://github.com/john1117/xu_sysInfo.git
+</code>
 Create a project file.
 # qmake -project
 
