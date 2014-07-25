@@ -924,7 +924,7 @@
     </font>
    </property>
    <property name="text">
-    <string>*C</string>
+    <string>°C</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_34">
@@ -942,7 +942,7 @@
     </font>
    </property>
    <property name="text">
-    <string>*C</string>
+    <string>°C</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_35">
@@ -960,7 +960,7 @@
     </font>
    </property>
    <property name="text">
-    <string>*C</string>
+    <string>°C</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_36">
@@ -978,7 +978,7 @@
     </font>
    </property>
    <property name="text">
-    <string>*C</string>
+    <string>°C</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_37">
