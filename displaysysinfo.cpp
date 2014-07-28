@@ -47,8 +47,6 @@ DisplaySysInfo::DisplaySysInfo(QWidget *parent) :
     G3DSensorCurve = new QwtPlotCurve();
 
     displaySensorPlot();
-    update();
-
 }
 
 DisplaySysInfo::~DisplaySysInfo()
@@ -59,7 +57,7 @@ DisplaySysInfo::~DisplaySysInfo()
 
 void DisplaySysInfo::displaySensorPlot()
 {
-    ui->qwtPlotSensor->setAxisScale(QwtPlot::yLeft, 0, 10);
+    ui->qwtPlotSensor->setAxisScale(QwtPlot::yLeft, 0, 5);
     ui->qwtPlotSensor->setAxisScale(QwtPlot::xBottom, 0, 100);
     ui->qwtPlotSensor->setAxisTitle(QwtPlot::xBottom, "sec");
     ui->qwtPlotSensor->setAxisTitle(QwtPlot::yLeft, "Watt");

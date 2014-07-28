@@ -72,8 +72,6 @@ int GetNode::open_sensor(const char *node, sensor_t *sensor)
 {
     if ((sensor->fd = open(node, O_RDWR)) < 0)
         qDebug() << node << "Open Fail";
-    else
-        qDebug() << node << "Open Success";
 
     return sensor->fd;
 }
@@ -158,8 +156,6 @@ void GetNode::enable_sensor(sensor_t *sensor, unsigned char enable)
         sensor->data.enable = enable ? 1 : 0;
         if (ioctl(sensor->fd, INA231_IOCSSTATUS, &sensor->data) < 0)
             qDebug() << "IOCTL Error";
-        else
-            qDebug() << sensor->data.name << (enable ? "enable" : "disable");
     }
 }
 
@@ -168,8 +164,6 @@ int GetNode::read_sensor_status(sensor_t *sensor)
     if (sensor->fd > 0) {
         if (ioctl(sensor->fd, INA231_IOCGSTATUS, &sensor->data) < 0)
             qDebug() << sensor->data.name << "IOCTL Error";
-        else
-            qDebug() << sensor->data.name << "read status!";
     }
     return 0;
 }

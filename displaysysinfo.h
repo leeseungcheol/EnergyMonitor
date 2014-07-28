@@ -29,20 +29,19 @@ public:
 private:
     Ui::DisplaySysInfo *ui;
 
-    plotdata armPlotData;
-    plotdata memPlotData;
-    plotdata kfcPlotData;
-    plotdata g3dPlotData;
-
     GetNode *getNode;
-    void DisplaySensor(void);
-
     QwtPlotCurve *ARMSensorCurve;
     QwtPlotCurve *MEMSensorCurve;
     QwtPlotCurve *KFCSensorCurve;
     QwtPlotCurve *G3DSensorCurve;
     QwtPlot *qwtPlotSensor;
 
+    plotdata armPlotData;
+    plotdata memPlotData;
+    plotdata kfcPlotData;
+    plotdata g3dPlotData;
+
+    void DisplaySensor(void);
     void displaySensorPlot(void);
     void drawARMSensorCurve(void);
     void drawMEMSensorCurve(void);

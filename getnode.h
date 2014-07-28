@@ -8,9 +8,6 @@
 #define GPUFREQ_NODE    "/sys/devices/11800000.mali/clock"
 #define TEMP_NODE       "/sys/devices/10060000.tmu/temp"
 
-
-
-
 typedef struct ina231_iocreg__t {
     char name[20];
     unsigned int enable;
@@ -45,23 +42,19 @@ enum    {
 class GetNode
 {
 public:
-    QString cpu_node_list[8];
     GetNode();
-    QString GetGPUCurFreq(void);
-    QString GetCPUCurFreq(int cpuNum);
-    QString GetCPUTemp(int cpuNum);
-    int GetCPUUsage(void);
-    int calUsage(int cpu_idx, int user, int nice, int system, int idle);
-
+    QString cpu_node_list[8];
     float armuV,armuA, armuW;
     float g3duV, g3duA, g3duW;
     float kfcuV, kfcuA, kfcuW;
     float memuV, memuA, memuW;
     int usage[8];
 
-    int mOldUserCPU[8];
-    int mOldSystemCPU[8];
-    int mOldIdleCPU[8];
+    QString GetGPUCurFreq(void);
+    QString GetCPUCurFreq(int cpuNum);
+    QString GetCPUTemp(int cpuNum);
+    int GetCPUUsage(void);
+    int calUsage(int cpu_idx, int user, int nice, int system, int idle);
 
     int open_sensor(const char *node, sensor_t *sensor);
     void close_sensor(sensor_t *sensor);
@@ -72,8 +65,12 @@ public:
     int OpenINA231(void);
     void CloseINA231(void);
     void GetINA231(void);
+
 private:
     sensor_t sensor[SENSOR_MAX];
+    int mOldUserCPU[8];
+    int mOldSystemCPU[8];
+    int mOldIdleCPU[8];
 
 };
 
