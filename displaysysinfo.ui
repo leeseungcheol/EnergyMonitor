@@ -566,7 +566,7 @@
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
-     <x>369</x>
+     <x>375</x>
      <y>20</y>
      <width>31</width>
      <height>17</height>
@@ -584,9 +584,9 @@
   <widget class="QLabel" name="label_14">
    <property name="geometry">
     <rect>
-     <x>438</x>
+     <x>446</x>
      <y>20</y>
-     <width>31</width>
+     <width>21</width>
      <height>17</height>
     </rect>
    </property>
@@ -1018,6 +1018,40 @@
    </property>
    <property name="text">
     <string>S/W Version : 1.0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_38">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>30</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>°C</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="GPUTempEdit">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>25</y>
+     <width>41</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

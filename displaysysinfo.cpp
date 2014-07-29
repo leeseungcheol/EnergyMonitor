@@ -17,19 +17,7 @@ DisplaySysInfo::DisplaySysInfo(QWidget *parent) :
 
     getNode = new GetNode();
 
-    ui->GPUFreqEdit->setText(getNode->GetGPUCurFreq());
-    ui->CPU0FreqEdit->setText(getNode->GetCPUCurFreq(0));
-    ui->CPU1FreqEdit->setText(getNode->GetCPUCurFreq(1));
-    ui->CPU2FreqEdit->setText(getNode->GetCPUCurFreq(2));
-    ui->CPU3FreqEdit->setText(getNode->GetCPUCurFreq(3));
-    ui->CPU4FreqEdit->setText(getNode->GetCPUCurFreq(4));
-    ui->CPU5FreqEdit->setText(getNode->GetCPUCurFreq(5));
-    ui->CPU6FreqEdit->setText(getNode->GetCPUCurFreq(6));
-    ui->CPU7FreqEdit->setText(getNode->GetCPUCurFreq(7));
-    ui->CPU4TempEdit->setText(getNode->GetCPUTemp(0));
-    ui->CPU5TempEdit->setText(getNode->GetCPUTemp(1));
-    ui->CPU6TempEdit->setText(getNode->GetCPUTemp(2));
-    ui->CPU7TempEdit->setText(getNode->GetCPUTemp(3));
+    displayCpuFrequency();
 
     if (getNode->OpenINA231())
         qDebug() << "OpenINA231 error";
@@ -40,6 +28,11 @@ DisplaySysInfo::DisplaySysInfo(QWidget *parent) :
     memPlotData.index = 0;
     kfcPlotData.index = 0;
     g3dPlotData.index = 0;
+
+    a15Volt = a15Ampere = a15Watt = "";
+    a7Volt = a7Ampere = a7Watt = "";
+    gpuVolt = gpuAmpere = gpuWatt = "";
+    memVolt = memAmpere = memWatt = "";
 
     ARMSensorCurve = new QwtPlotCurve();
     MEMSensorCurve = new QwtPlotCurve();
@@ -156,36 +149,58 @@ void DisplaySysInfo::drawG3DSensorCurve()
 void DisplaySysInfo::DisplaySensor()
 {
     getNode->GetINA231();
-    ui->ARMuAlcd->setPalette(QColor(100, 100, 100));
+
+    float2string();
+
     ui->ARMuVlcd->setPalette(QColor(100, 100, 100));
+    ui->ARMuAlcd->setPalette(QColor(100, 100, 100));
     ui->ARMuWlcd->setPalette(QColor(100, 100, 100));
-    ui->ARMuAlcd->display(getNode->armuA);
-    ui->ARMuVlcd->display(getNode->armuV);
-    ui->ARMuWlcd->display(getNode->armuW);
+    ui->ARMuVlcd->display(a15Volt);
+    ui->ARMuAlcd->display(a15Ampere);
+    ui->ARMuWlcd->display(a15Watt);
 
-    ui->MEMuAlcd->setPalette(QColor(100, 100, 100));
-    ui->MEMuVlcd->setPalette(QColor(100, 100, 100));
-    ui->MEMuWlcd->setPalette(QColor(100, 100, 100));
-    ui->MEMuAlcd->display(getNode->memuA);
-    ui->MEMuVlcd->display(getNode->memuV);
-    ui->MEMuWlcd->display(getNode->memuW);
-
-    ui->KFCuAlcd->setPalette(QColor(100, 100, 100));
     ui->KFCuVlcd->setPalette(QColor(100, 100, 100));
+    ui->KFCuAlcd->setPalette(QColor(100, 100, 100));
     ui->KFCuWlcd->setPalette(QColor(100, 100, 100));
-    ui->KFCuAlcd->display(getNode->kfcuA);
-    ui->KFCuVlcd->display(getNode->kfcuV);
-    ui->KFCuWlcd->display(getNode->kfcuW);
+    ui->KFCuVlcd->display(a7Volt);
+    ui->KFCuAlcd->display(a7Ampere);
+    ui->KFCuWlcd->display(a7Watt);
 
-    ui->G3DuAlcd->setPalette(QColor(100, 100, 100));
     ui->G3DuVlcd->setPalette(QColor(100, 100, 100));
+    ui->G3DuAlcd->setPalette(QColor(100, 100, 100));
     ui->G3DuWlcd->setPalette(QColor(100, 100, 100));
-    ui->G3DuAlcd->display(getNode->g3duA);
-    ui->G3DuVlcd->display(getNode->g3duV);
-    ui->G3DuWlcd->display(getNode->g3duW);
+    ui->G3DuVlcd->display(gpuVolt);
+    ui->G3DuAlcd->display(gpuAmpere);
+    ui->G3DuWlcd->display(gpuWatt);
+
+    ui->MEMuVlcd->setPalette(QColor(100, 100, 100));
+    ui->MEMuAlcd->setPalette(QColor(100, 100, 100));
+    ui->MEMuWlcd->setPalette(QColor(100, 100, 100));
+    ui->MEMuVlcd->display(memVolt);
+    ui->MEMuAlcd->display(memAmpere);
+    ui->MEMuWlcd->display(memWatt);
 }
 
-void DisplaySysInfo::update()
+void DisplaySysInfo::float2string()
+{
+    a15Volt.sprintf("%.3f", getNode->armuV);
+    a15Ampere.sprintf("%.3f", getNode->armuA);
+    a15Watt.sprintf("%.3f", getNode->armuW);
+
+    a7Volt.sprintf("%.3f", getNode->kfcuV);
+    a7Ampere.sprintf("%.3f", getNode->kfcuA);
+    a7Watt.sprintf("%.3f", getNode->kfcuW);
+
+    gpuVolt.sprintf("%.3f", getNode->g3duV);
+    gpuAmpere.sprintf("%.3f", getNode->g3duA);
+    gpuWatt.sprintf("%.3f", getNode->g3duW);
+
+    memVolt.sprintf("%.3f", getNode->memuV);
+    memAmpere.sprintf("%.3f", getNode->memuA);
+    memWatt.sprintf("%.3f", getNode->memuW);
+}
+
+void DisplaySysInfo::displayCpuFrequency()
 {
     ui->GPUFreqEdit->setText(getNode->GetGPUCurFreq());
     ui->CPU0FreqEdit->setText(getNode->GetCPUCurFreq(0));
@@ -200,6 +215,12 @@ void DisplaySysInfo::update()
     ui->CPU5TempEdit->setText(getNode->GetCPUTemp(1));
     ui->CPU6TempEdit->setText(getNode->GetCPUTemp(2));
     ui->CPU7TempEdit->setText(getNode->GetCPUTemp(3));
+    ui->GPUTempEdit->setText(getNode->GetCPUTemp(4));
+}
+
+void DisplaySysInfo::update()
+{
+    displayCpuFrequency();
     DisplaySensor();
     drawARMSensorCurve();
     drawMEMSensorCurve();

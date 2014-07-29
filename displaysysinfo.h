@@ -41,12 +41,19 @@ private:
     plotdata kfcPlotData;
     plotdata g3dPlotData;
 
+    QString a15Volt, a15Ampere, a15Watt;
+    QString a7Volt, a7Ampere, a7Watt;
+    QString gpuVolt, gpuAmpere, gpuWatt;
+    QString memVolt, memAmpere, memWatt;
+
     void DisplaySensor(void);
+    void float2string(void);
     void displaySensorPlot(void);
     void drawARMSensorCurve(void);
     void drawMEMSensorCurve(void);
     void drawKFCSensorCurve(void);
     void drawG3DSensorCurve(void);
+    void displayCpuFrequency(void);
 
 private slots:
     void update();
