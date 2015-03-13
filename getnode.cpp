@@ -21,33 +21,33 @@ QString GetNode::GetGPUCurFreq()
 {
 
     QFile *fp = new QFile(GPUFREQ_NODE);
-    char buf[4];
+    QString freq;
 
-    if (!fp->open(QIODevice::ReadOnly)) {
+    if (!fp->open(QIODevice::ReadOnly))
         return 0;
-    }
 
-    fp->readLine(buf, 4);
+    freq = fp->readLine();
+    freq.sprintf("%d", freq.toInt());
 
     fp->close();
 
-    return buf;
+    return freq;
 }
 
 QString GetNode::GetCPUCurFreq(int cpuNum)
 {
     QFile *fp = new QFile(cpu_node_list[cpuNum]);
-    char buf[8];
+    QString freq;
 
-    if (!fp->open(QIODevice::ReadOnly)) {
+    if (!fp->open(QIODevice::ReadOnly))
         return 0;
-    }
 
-    fp->readLine(buf, 5);
+    freq = fp->readLine();
+    freq.sprintf("%d", freq.toInt()/1000);
 
     fp->close();
 
-    return buf;
+    return freq;
 }
 
 QString GetNode::GetCPUTemp(int cpuNum)
